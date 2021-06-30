@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Ninja Gold</title>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Ninja Gold!</h1>
+        <div class="col-sm-4 mt-3"style="display:flex; justify-content:space-around; border:solid 2px black;">
+            <p>Your Gold:</p>
+            <p>{{request.session.gold}}</p>
+        </div>
+        <div class="row mt-3 text-center">
+
+            <form action="/process_money" method="post" class="col-md-3 mt-2 mb-2" style="border:solid 2px black;">
+                 {% csrf_token %}
+                <label for="" class="form-label">Farm</label>
+                <p>(earns 10-20 golds)</p>
+                <input type="hidden" name="type" value="farm" class="form-control">
+                <button class="btn btn-secondary col-md-8 mb-3">Find gold!</button>
+            </form>
+            <form action="/process_money" method="post" class="col-md-3 mt-2 mb-2" style="border:solid 2px black;">
+                {% csrf_token %}
+                <label for="" class="form-label">Cave</label>
+                <p>(earns 5-10 golds)</p>
+                <input type="hidden" name="type" value="cave" class="form-control">
+                <button class="btn btn-secondary col-md-8">Find gold!</button>
+            </form>
+            <form action="/process_money" method="post" class="col-md-3 mt-2 mb-2" style="border:solid 2px black;">
+                 {% csrf_token %}
+                <label for="" class="form-label">House</label>
+                <p>(earns 2-5 golds)</p>
+                <input type="hidden" name="type" value="house"class="form-control">
+                <button class="btn btn-secondary col-md-8">Find gold!</button>
+            </form>
+            <form action="/process_money" method="post" class="col-md-3 mt-2 mb-2" style="border:solid 2px black;">
+                 {% csrf_token %}
+                <label for="" class="form-label">Casino</label>
+                <p>(earns/takes 0-50 golds)</p>
+                <input type="hidden" name="type" value="casino" class="form-control">
+                <button class="btn btn-secondary col-md-8">Find gold!</button>
+            </form>
+        </div>
+        <div class="col-md-8 mt-3" style="border:solid 2px black;">
+            {% for message in request.session.result %}
+            <p>{{message}}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
