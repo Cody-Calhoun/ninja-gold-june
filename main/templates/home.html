@@ -38,7 +38,7 @@
                 <button class="btn btn-secondary col-md-8">Find gold!</button>
             </form>
             <form action="/process_money" method="post" class="col-md-3 mt-2 mb-2" style="border:solid 2px black;">
-                 {% csrf_token %}
+                {% csrf_token %}
                 <label for="" class="form-label">Casino</label>
                 <p>(earns/takes 0-50 golds)</p>
                 <input type="hidden" name="type" value="casino" class="form-control">

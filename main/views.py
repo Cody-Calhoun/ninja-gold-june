@@ -23,9 +23,13 @@ def process_money(request):
         request.session['gold'] += random.randint(2, 5)
     else:
         request.session['gold'] += random.randint(-50, 50)
+
     transaction_time = datetime.now().strftime("%m/%d/%Y %I:%M%p")
-    message = f"Earned {abs(original_gold-request.session['gold'])} golds from the {building}! ({transaction_time})"
+    if request.session['gold'] < original_gold:
+        gold_lost = abs(original_gold - request.session['gold'])
+        message = f"Uh-Oh you lost {gold_lost} golds from the {building}! ({transaction_time})"
+    else:
+        message = f"Earned {abs(original_gold-request.session['gold'])} gold from the {building}! ({transaction_time})"
     request.session['result'].append(message)
-    print(request.session['result'])
 
     return redirect('/')
